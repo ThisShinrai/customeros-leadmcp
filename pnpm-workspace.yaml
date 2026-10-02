@@ -1,0 +1,8 @@
+# Windows: Next.js standalone output cannot symlink pnpm's default store layout (EPERM)
+nodeLinker: hoisted
+
+allowBuilds:
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  workerd: true

@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+const b = await chromium.launch({ headless: true });
+const p = await (await b.newContext({ viewport: { width: 1440, height: 900 } })).newPage();
+const errs = [];
+p.on('pageerror', e => errs.push(String(e).slice(0,150)));
+await p.goto('http://localhost:3000/', { waitUntil: 'networkidle' });
+await p.screenshot({ path: 'C:/Users/papsn/Desktop/customer-os/e2e/shots/landing-hero.png' });
+console.log('hero visible:', await p.getByText('Ein Zuhause für').first().isVisible());
+console.log('pricing visible:', await p.getByText('Fair und transparent').first().isVisible());
+console.log('pageerrors:', errs.length ? errs : 'none');
+await b.close();
